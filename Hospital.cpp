@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-	Patient *ptr = get_patient_info();
-	print_patients(ptr);
+	menu_options();
 	return (0);
 }

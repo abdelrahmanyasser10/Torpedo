@@ -9,9 +9,10 @@ using namespace std;
 
 struct Patient
 {
-    string Name;
+    string First_Name;
+    string Last_Name;
     string Gender;
-    long int Mobile;
+    string Mobile;
     int Md_tk;
     float Payment;
     Patient *next;
@@ -35,9 +36,9 @@ public:
         }
     }
 
-    Patient *insert(const Patient &data)
+    void insert(const Patient &data)
     {
-        Patient *newNode = new Patient{data.Name, data.Gender, data.Mobile, data.Md_tk, data.Payment, nullptr};
+        Patient *newNode = new Patient{data.First_Name, data.Last_Name, data.Gender, data.Mobile, data.Md_tk, data.Payment, nullptr};
         if (head == nullptr)
             head = newNode;
         else
@@ -47,15 +48,22 @@ public:
                 current = current->next;
             current->next = newNode;
         }
-        return head;
     }
 
     int number_of_patients()
     {
         return count;
     }
+
+    Patient *head_ptr()
+    {
+        return head;
+    }
 };
 
-Patient *get_patient_info();
+void get_patient_info();
+float Payment_Bouns(float payment);
 void print_patients(Patient *head);
+void menu_options();
+
 #endif
