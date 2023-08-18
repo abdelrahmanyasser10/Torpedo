@@ -2,7 +2,7 @@
 
 int main()
 {
-    Stack obj1;
+    Stack<int> obj1;
     obj1.push(5);
     obj1.push(90);
     obj1.push(20);
@@ -12,7 +12,7 @@ int main()
     obj1.pop();
     obj1.pop();
 
-    Queue obj2;
+    Queue<float> obj2;
     obj2.push(5);
     obj2.push(90);
     obj2.push(20);

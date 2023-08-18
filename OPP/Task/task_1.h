@@ -5,42 +5,43 @@
 
 using namespace std;
 
-
-
+template <typename T>
 
 struct stack
 {
-    int Data = 0;
+    T Data;
     stack *next = nullptr;
 };
 
+template <typename T>
 struct queue
 {
-    int Data = 0;
+    T Data;
     queue *next = nullptr;
     queue *prev = nullptr;
 };
 
+template <typename T>
 class Container {
 public:
-virtual void push(int value) = 0;
-virtual int pop() = 0;
+virtual void push(T value) = 0;
+virtual T pop() = 0;
 virtual bool isEmpty()= 0;
 };
 
-
-class Stack : public Container
+template <typename T>
+class Stack : public Container<T>
 {
 protected:
-    stack *head;
+    stack<T> *head;
 public:
     Stack() : head(nullptr){}
     ~Stack()
     {
-        stack *current = this->head;
+        stack<T> *current = this->head;
         while(current != nullptr)
         {
-            stack *next = current->next;
+            stack<T> *next = current->next;
             delete current;
             current = next;
         }
@@ -52,16 +53,16 @@ public:
         return this->head == nullptr ? true : false;
     }
 
-    void push(int value)
+    void push(T value)
     {
-        stack *newNode = new stack;
+        stack<T> *newNode = new stack<T>;
         newNode->next = this->head;
         newNode->Data = value;
         head = newNode;
         printList(head);
     }
 
-    int pop()
+    T pop()
     {
         if(isEmpty())
         {
@@ -70,7 +71,7 @@ public:
         }
         else
         {
-            stack *firstNode = this->head;
+            stack<T> *firstNode = this->head;
             head = head-> next;
             delete firstNode;
             printList(head);
@@ -78,7 +79,7 @@ public:
         }
     }
 
-    void printList(stack *head)
+    void printList(stack<T> *head)
     {
         while (head) 
         {
@@ -93,19 +94,20 @@ public:
 
 }; 
 
-class Queue : public Container
+template <typename T>
+class Queue : public Container<T>
 {
 protected:
-    queue *head;
-    queue *tail;
+    queue<T> *head;
+    queue<T> *tail;
 public:
     Queue() : head(nullptr), tail(nullptr){}
     ~Queue()
     {
-        queue *current = this->head;
+        queue<T> *current = this->head;
         while(current != nullptr)
         {
-            queue *next = current->next;
+            queue<T> *next = current->next;
             delete current;
             current = next;
         }
@@ -117,9 +119,9 @@ public:
         return (this->head == nullptr) ? true : false;
     }
 
-    void push(int value)
+    void push(T value)
     {
-        queue *newNode = new queue;
+        queue<T> *newNode = new queue<T>;
         if(isEmpty())
         {
             newNode->Data = value;
@@ -128,7 +130,7 @@ public:
         }
         else
         {
-            queue *temp =  this->head;
+            queue<T> *temp =  this->head;
             temp->prev = newNode;
             newNode->Data = value;
             newNode->next = temp;
@@ -137,7 +139,7 @@ public:
         printList(head);
     }
 
-    int pop()
+    T pop()
     {   
         if(isEmpty())
         {
@@ -146,7 +148,7 @@ public:
         }
         else
         {
-            queue *lastNode = this->tail;
+            queue<T> *lastNode = this->tail;
             if (lastNode->prev != nullptr)
                 lastNode->prev->next = nullptr;
             tail = tail->prev;
@@ -161,7 +163,7 @@ public:
         }
     }
 
-    void printList(queue *head)
+    void printList(queue<T> *head)
     {
         while (head) 
         {
